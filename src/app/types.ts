@@ -34,4 +34,4 @@ export interface Task {
   // complete: boolean;
 }
 
-export type Tasks = Task[];
+// export type Tasks = Task[];

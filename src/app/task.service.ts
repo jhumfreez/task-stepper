@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
-import { mockSteps } from '../../mocks/stepper.mock';
+import { mockTasks } from './mocks/stepper.mock';
 import { Task } from './types';
 
 @Injectable({
@@ -8,6 +8,6 @@ import { Task } from './types';
 })
 export class TaskService {
   // TODO: Move to state selector
-  steps: Observable<Task[]> = of(mockSteps);
+  steps: Observable<Task[]> = of(mockTasks);
   constructor() {}
 }
