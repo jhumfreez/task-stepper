@@ -1,0 +1,9 @@
+/* Add application styles & imports to this file! */
+
+@use '@angular/material' as mat;
+@include mat.core();
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+$my-palette: mat.define-palette(mat.$indigo-palette);
+$my-primary: mat.define-palette(mat.$indigo-palette);
+$my-accent: mat.define-palette(mat.$indigo-palette);

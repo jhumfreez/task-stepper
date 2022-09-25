@@ -1,0 +1,15 @@
+<!-- docs: https://material.angular.io/components/stepper/overview -->
+<!-- TODO
+  - work w/ router-outlet: https://stackoverflow.com/questions/57331609/angular-7-stepper-component-working-with-routing
+  - mobile: https://material.angular.io/components/stepper/overview#stepper-responsive
+-->
+<mat-stepper [linear]="isLinear" #stepper [orientation]="'horizontal'">
+<mat-step
+  *ngFor="let step of $steps | async; index as i"
+  [label]="step.label"
+  [editable]="!step.isLocked"
+  [optional]="step.isOptional"
+>
+  <h2>Step: {{ step.label }}</h2>
+</mat-step>
+</mat-stepper>
