@@ -16,7 +16,7 @@ export class ProgressStepperComponent {
   // tempForm = new FormGroup({
   //   noop: new FormControl(''),
   // });
-  // Note: Stepper can provide info about the step (getSteps)
+  // Note: Mat Stepper can provide info about the step (getSteps)
   @Input() steps: Task[] = [];
   taskStatus = TaskStatus;
   route_task_map = BUY_ROUTE_TASK_MAP;
