@@ -1,5 +1,7 @@
 import { Component, VERSION } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
+import { TaskService } from './task.service';
 import { Task } from './types';
 /**
  * Goals:
@@ -17,9 +19,17 @@ import { Task } from './types';
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
   steps: Task[] = [];
-
-  constructor(private fakeDealService: SimpleDealHttpService) {
+  task$: Observable<Task[]>;
+  constructor(
+    private fakeDealService: SimpleDealHttpService,
+    private taskService: TaskService
+  ) {
+    this.task$ = this.taskService.getSteps();
     // Determine cash only status
-    this.fakeDealService.fetchMockData(true).subscribe((isCashOnly) => {});
+    this.fakeDealService.fetchMockData(true).subscribe((isCashOnly) => {
+      if (isCashOnly) {
+        this.taskService.handleCashDeal();
+      }
+    });
   }
 }

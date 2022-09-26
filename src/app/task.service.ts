@@ -8,21 +8,25 @@ import { Task, TaskStatus, isFinanceTask } from './types';
 })
 export class TaskService {
   // TODO: Move to state selector
-  _steps: Task[] = mockTasks.map((task) => {
-    return { ...task };
-  });
+  private _steps: Task[];
 
-  steps: BehaviorSubject<Task[]> = new BehaviorSubject(this._steps);
+  readonly steps: BehaviorSubject<Task[]>;
 
   get visibleSteps() {
     return this._steps.filter((steps) => steps.status !== TaskStatus.Hidden);
   }
 
   getSteps() {
+    // Not returning behavior subject to guard against updates from multiple sources
     return this.steps.asObservable();
   }
 
-  constructor() {}
+  constructor() {
+    this._steps = mockTasks.map((task) => {
+      return { ...task };
+    });
+    this.steps = new BehaviorSubject(this._steps);
+  }
 
   handleCashDeal() {
     this._steps.forEach((step) => {

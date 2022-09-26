@@ -9,12 +9,16 @@ import { ProgressStepperComponent } from './progress-stepper/progress-stepper.co
 import { TaskState } from './store/task.state';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     MatModule,
+    BrowserAnimationsModule,
     NgxsModule.forRoot([TaskState]),
     NgxsResetPluginModule.forRoot(),
   ],
