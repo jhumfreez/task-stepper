@@ -34,6 +34,6 @@ export class TaskService {
         step.status = TaskStatus.Hidden;
       }
     });
-    this.steps.next(this._steps);
+    this.steps.next(this.visibleSteps);
   }
 }

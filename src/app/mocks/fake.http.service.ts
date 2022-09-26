@@ -23,6 +23,6 @@ export class MockTasksHttpService implements FakeHttpService<Task[]> {
 })
 export class SimpleDealHttpService implements FakeHttpService<boolean> {
   fetchMockData(expectedResult = true): Observable<boolean> {
-    return of(expectedResult).pipe(delay(2000));
+    return of(expectedResult).pipe(delay(5000));
   }
 }
