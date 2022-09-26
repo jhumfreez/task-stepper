@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
 import { Task, TaskStatus } from '../types';
 import { SetTasks, UpdateTask } from './task.actions';
+import { patch, updateItem } from '@ngxs/store/operators';
 
 export interface TaskStateModel {
   tasks: Task[];
@@ -31,20 +32,32 @@ export class TaskState {
   }
 
   @Action(SetTasks)
-  setTasks({ patchState }: StateContext<TaskStateModel>, action: SetTasks) {
-    patchState({ tasks: action.tasks });
+  setTasks(ctx: StateContext<TaskStateModel>, action: SetTasks) {
+    ctx.setState(patch<TaskStateModel>({ tasks: action.tasks }));
   }
 
   @Action(UpdateTask)
-  updateTasks(
-    { patchState, getState }: StateContext<TaskStateModel>,
-    action: UpdateTask
-  ) {
-    const taskList = getState().tasks.map((x) => {
+  updateTask(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
+    const taskList = ctx.getState().tasks.map((x: Task) => {
       if (x.taskType === action.task.taskType) {
-        x = { ...action.task };
+        return { ...action.task };
       }
+      return x;
     });
-    patchState({ tasks: taskList });
+    // ctx.setState(patch<TaskStateModel>({ tasks: taskList }));
+    ctx.setState({ ...ctx.getState(), tasks: taskList });
+  }
+
+  // Alternative to above, for funsies or something
+  @Action(UpdateTask)
+  updateTaskAlt(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
+    ctx.setState(
+      patch<TaskStateModel>({
+        tasks: updateItem<Task>(
+          (stateTask: Task) => stateTask.taskType === action.task.taskType,
+          action.task
+        ),
+      })
+    );
   }
 }
