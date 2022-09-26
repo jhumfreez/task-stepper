@@ -14,9 +14,8 @@
     [label]="step.label"
     [editable]="step.status !== taskStatus.Locked"
     [optional]="step.optional"
-    [routerLink]="route_task_map.get(i)"
+    [routerLink]="['/' + route_task_map.get(i)]"
   >
-    <!-- <h2>Step: {{ step.label }}</h2> -->
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="i === stepper.selectedIndex"></router-outlet>
   </mat-step>
 </mat-stepper>

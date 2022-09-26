@@ -29,6 +29,6 @@ export class ProgressStepperComponent {
   }
 
   selectionChanged(event: StepperSelectionEvent) {
-    // this.router.navigate(['/'+BUY_ROUTE_TASK_MAP.get(event.selectedIndex)])
+    this.router.navigate(['/' + BUY_ROUTE_TASK_MAP.get(event.selectedIndex)]);
   }
 }
