@@ -25,6 +25,9 @@ export class AppComponent {
     private taskService: TaskService
   ) {
     this.task$ = this.taskService.getSteps();
+
+  }
+  setCashDeal(){
     // Determine cash only status
     this.fakeDealService.fetchMockData(true).subscribe((isCashOnly) => {
       if (isCashOnly) {
