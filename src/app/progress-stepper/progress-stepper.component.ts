@@ -2,7 +2,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BUY_ROUTE_TASK_MAP } from '../app.routing.module';
-import { Task, TaskStatus } from '../types';
+import { TaskService } from '../task.service';
+import { Task, TaskStatus, TaskType } from '../types';
 @Component({
   selector: 'app-progress-stepper',
   templateUrl: './progress-stepper.component.html',
@@ -20,7 +21,7 @@ export class ProgressStepperComponent {
   taskStatus = TaskStatus;
   route_task_map = BUY_ROUTE_TASK_MAP;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private taskStepper: TaskService) {
     // breakpointObserver: BreakpointObserver
     // Note: puts stepper in vertical orienation
     // this.$stepperOrientation = breakpointObserver
@@ -29,6 +30,7 @@ export class ProgressStepperComponent {
   }
 
   selectionChanged(event: StepperSelectionEvent) {
-    this.router.navigate(['/' + BUY_ROUTE_TASK_MAP.get(event.selectedIndex)]);
+    const routeSegment = BUY_ROUTE_TASK_MAP.get(event.selectedIndex);
+    this.router.navigate(['/' + routeSegment]);
   }
 }
