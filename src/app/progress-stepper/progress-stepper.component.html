@@ -4,12 +4,12 @@
   - mobile: https://material.angular.io/components/stepper/overview#stepper-responsive
 -->
 <mat-stepper [linear]="isLinear" #stepper [orientation]="'horizontal'">
-<mat-step
-  *ngFor="let step of $steps | async; index as i"
-  [label]="step.label"
-  [editable]="!step.isLocked"
-  [optional]="step.isOptional"
->
-  <h2>Step: {{ step.label }}</h2>
-</mat-step>
+  <mat-step
+    *ngFor="let step of steps; index as i"
+    [label]="step.label"
+    [editable]="step.status !== taskStatus.Locked"
+    [optional]="step.optional"
+  >
+    <h2>Step: {{ step.label }}</h2>
+  </mat-step>
 </mat-stepper>

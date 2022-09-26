@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';;
-// import { StepperService } from '../shared/services/stepper/stepper.service';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Task, TaskStatus } from '../types';
 @Component({
   selector: 'app-progress-stepper',
   templateUrl: './progress-stepper.component.html',
@@ -14,14 +13,12 @@ export class ProgressStepperComponent implements OnInit {
   //   noop: new FormControl(''),
   // });
   // Note: Stepper can provide info about the step (getSteps)
-  // $steps = this.stepperService.steps;
-  // $stepperOrientation: Observable<StepperOrientation>;
+  @Input() steps: Task[] = [];
+  taskStatus = TaskStatus;
 
-  constructor(
-    // private stepperService: StepperService,
+  constructor() {
     // breakpointObserver: BreakpointObserver
-  ) {
-    // Note: puts stepper in vertical orienation 
+    // Note: puts stepper in vertical orienation
     // this.$stepperOrientation = breakpointObserver
     //   .observe('(min-width: 576px)')
     //   .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));

@@ -29,9 +29,12 @@ export interface Task {
   taskType: TaskType;
   label: string;
   status: TaskStatus;
-  // hidden: boolean;
-  // skipped: boolean;
-  // complete: boolean;
+  // Some tasks cannot be skipped
+  optional: boolean;
 }
 
-// export type Tasks = Task[];
+export type FinanceTasks = TaskType.FIProducts | TaskType.CreditApp;
+
+export const isFinanceTask = (x: unknown): x is FinanceTasks => {
+  return x === TaskType.FIProducts || x === TaskType.CreditApp;
+};
