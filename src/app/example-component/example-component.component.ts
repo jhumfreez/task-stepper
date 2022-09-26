@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './example-component.component.html',
   styleUrls: ['./example-component.component.css'],
 })
-export class ExampleComponentComponent {
+export class ExampleComponent {
   label: string = '';
-  constructor(private route: ActivatedRoute) {}
+  constructor(protected route: ActivatedRoute) {}
 }
