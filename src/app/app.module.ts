@@ -11,6 +11,7 @@ import { NgxsResetPluginModule } from 'ngxs-reset-plugin';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExampleComponent } from './example-component/example-component.component';
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ExampleComponent } from './example-component/example-component.componen
     BrowserAnimationsModule,
     NgxsModule.forRoot([TaskState]),
     NgxsResetPluginModule.forRoot(),
+    AppRoutingModule,
   ],
   declarations: [AppComponent, ExampleComponent, ProgressStepperComponent],
   bootstrap: [AppComponent],

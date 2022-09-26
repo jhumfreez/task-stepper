@@ -3,14 +3,20 @@
   - work w/ router-outlet: https://stackoverflow.com/questions/57331609/angular-7-stepper-component-working-with-routing
   - mobile: https://material.angular.io/components/stepper/overview#stepper-responsive
 -->
-<mat-stepper [linear]="isLinear" #stepper [orientation]="'horizontal'">
+<mat-stepper
+  [linear]="isLinear"
+  #stepper
+  [orientation]="'horizontal'"
+  (selectionChange)="selectionChanged($event)"
+>
   <mat-step
     *ngFor="let step of steps; index as i"
     [label]="step.label"
     [editable]="step.status !== taskStatus.Locked"
     [optional]="step.optional"
+    [routerLink]="route_task_map.get(i)"
   >
     <!-- <h2>Step: {{ step.label }}</h2> -->
-    
+    <router-outlet></router-outlet>
   </mat-step>
 </mat-stepper>
