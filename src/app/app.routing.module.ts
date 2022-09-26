@@ -37,6 +37,8 @@ export const BUY_ROUTE_TASK_MAP = new Map([
   [TaskType.ScheduleDelivery, RoutePath.ScheduleDelivery],
 ]);
 
+// TODO: Guard finance/lease-only routes
+
 const routes: Routes = [
   {
     path: '',

@@ -4,6 +4,12 @@ import { Task, TaskStatus } from '../types';
 import { SetTasks, UpdateTask } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
 
+/**
+ * Benefits:
+ * 1. Can retain state on refresh -- no need to rebuild stepper state
+ * 2. Does essentially the same thing without managing observables
+ */
+
 export interface TaskStateModel {
   tasks: Task[];
 }

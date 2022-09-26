@@ -28,6 +28,7 @@ export class TaskService {
     this.steps = new BehaviorSubject(this._steps);
   }
 
+  // TODO: Handle navigation or guard route when activated route isn't visible.
   handleCashDeal() {
     this._steps.forEach((step) => {
       if (isFinanceTask(step.taskType)) {
