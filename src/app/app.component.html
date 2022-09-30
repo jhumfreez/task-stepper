@@ -2,6 +2,9 @@
   [steps]="task$ | async"
   [isLoading]="isLoading"
 ></app-progress-stepper>
-<button mat-raised-button color="primary" (click)="setCashDeal()">
-  Set Cash Only
+<button mat-raised-button color="accent" (click)="setCashDeal()" class="btn">
+  Set Cash Only (reduce steps)
+</button>
+<button mat-raised-button color="warn" (click)="resetSteps()" class="btn">
+  Reset Steps
 </button>

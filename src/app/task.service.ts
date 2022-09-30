@@ -22,9 +22,7 @@ export class TaskService {
   }
 
   constructor() {
-    this._steps = mockTasks.map((task) => {
-      return { ...task };
-    });
+    this.initialize();
     this.steps = new BehaviorSubject(this._steps);
   }
 
@@ -36,5 +34,16 @@ export class TaskService {
       }
     });
     this.steps.next(this.visibleSteps);
+  }
+
+  reset() {
+    this.initialize();
+    this.steps.next(this.visibleSteps);
+  }
+
+  private initialize() {
+    this._steps = mockTasks.map((task) => {
+      return { ...task };
+    });
   }
 }

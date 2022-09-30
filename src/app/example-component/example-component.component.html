@@ -1,1 +1,66 @@
 <p>Welcome to: {{ this.route.title | async }}</p>
+<form [formGroup]="form" class="input-section">
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="firstName"
+      placeholder="First Name"
+      [errorStateMatcher]="matcher"
+    />
+    <mat-hint>Ex. John</mat-hint>
+    <mat-error
+      *ngIf="form.get('firstName').invalid && form.get('firstName').touched"
+    >
+      Invalid!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="lastName"
+      placeholder="Last Name"
+      [errorStateMatcher]="matcher"
+    />
+    <mat-hint>Ex. Doe</mat-hint>
+    <mat-error
+      *ngIf="form.get('lastName').invalid && form.get('lastName').touched"
+    >
+      Invalid!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="email"
+      placeholder=""
+      [errorStateMatcher]="matcher"
+    />
+    <mat-hint>Ex. john.doe@example.com</mat-hint>
+    <mat-error *ngIf="form.get('email').invalid && form.get('email').touched">
+      Invalid!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date of Birth</mat-label>
+    <input
+      type="date"
+      matInput
+      formControlName="dob"
+      placeholder="Date of Birth"
+      [errorStateMatcher]="matcher"
+    />
+    <mat-hint>Ex. 1/1/2001</mat-hint>
+    <mat-error *ngIf="form.get('dob').invalid && form.get('dob').touched">
+      Invalid!
+    </mat-error>
+  </mat-form-field>
+</form>

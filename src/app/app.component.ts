@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize, Observable, tap } from 'rxjs';
+import { RoutePath } from './app.routing.module';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
 import { TaskService } from './task.service';
 import { Task } from './types';
@@ -22,7 +24,8 @@ export class AppComponent {
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private router: Router
   ) {
     this.task$ = this.taskService.getSteps();
   }
@@ -43,5 +46,10 @@ export class AppComponent {
 
   toggleLoadingState() {
     this.isLoading = !this.isLoading;
+  }
+
+  resetSteps() {
+    this.taskService.reset();
+    this.router.navigate([RoutePath.PlanSelection]);
   }
 }
