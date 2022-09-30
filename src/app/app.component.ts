@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { finalize, Observable, tap } from 'rxjs';
-import { RoutePath } from './app.routing.module';
+import { finalize, Observable } from 'rxjs';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
 import { TaskService } from './task.service';
 import { Task } from './types';
@@ -24,8 +22,7 @@ export class AppComponent {
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
-    private taskService: TaskService,
-    private router: Router
+    private taskService: TaskService
   ) {
     this.task$ = this.taskService.getSteps();
   }
@@ -50,6 +47,5 @@ export class AppComponent {
 
   resetSteps() {
     this.taskService.reset();
-    this.router.navigate([RoutePath.PlanSelection]);
   }
 }
