@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { mockTasks } from './mocks/stepper.mock';
-import { Task, TaskStatus, isFinanceTask } from './types';
+import { Task, TaskStatus } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class TaskService {
   // TODO: Handle navigation or guard route when activated route isn't visible.
   handleCashDeal() {
     this._steps.forEach((step) => {
-      if (isFinanceTask(step.taskType)) {
+      if (!step.availableOnCashDeal) {
         step.status = TaskStatus.Hidden;
       }
     });

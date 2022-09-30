@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
 import { TaskService } from './task.service';
 import { Task } from './types';
@@ -19,6 +19,7 @@ import { Task } from './types';
 export class AppComponent {
   steps: Task[] = [];
   task$: Observable<Task[]>;
+  isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
     private taskService: TaskService
@@ -26,11 +27,21 @@ export class AppComponent {
     this.task$ = this.taskService.getSteps();
   }
   setCashDeal() {
+    this.toggleLoadingState();
     // Determine cash only status
-    this.fakeDealService.fetchMockData(true).subscribe((isCashOnly) => {
-      if (isCashOnly) {
-        this.taskService.handleCashDeal();
-      }
-    });
+    this.fakeDealService
+      .fetchMockData(true)
+      .pipe(finalize(() => this.toggleLoadingState()))
+      .subscribe({
+        next: (isCashOnly) => {
+          if (isCashOnly) {
+            this.taskService.handleCashDeal();
+          }
+        },
+      });
+  }
+
+  toggleLoadingState() {
+    this.isLoading = !this.isLoading;
   }
 }

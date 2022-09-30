@@ -31,10 +31,5 @@ export interface Task {
   status: TaskStatus;
   // Some tasks cannot be skipped
   optional: boolean;
+  availableOnCashDeal: boolean;
 }
-
-export type FinanceTasks = TaskType.FIProducts | TaskType.CreditApp;
-
-export const isFinanceTask = (x: unknown): x is FinanceTasks => {
-  return x === TaskType.FIProducts || x === TaskType.CreditApp;
-};

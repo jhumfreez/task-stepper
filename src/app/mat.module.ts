@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 // Note about shared modules: https://angular.io/guide/ngmodule-faq#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module
 // More concerns: https://leandromerli.com/angular-dont-use-shared-modules/
 
@@ -39,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -51,6 +52,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
+    MatProgressBarModule
   ],
 })
 export class MatModule {}

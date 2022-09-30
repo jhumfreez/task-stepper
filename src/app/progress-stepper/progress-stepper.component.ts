@@ -10,6 +10,9 @@ import { Task, TaskStatus, TaskType } from '../types';
   styleUrls: ['./progress-stepper.component.scss'],
 })
 export class ProgressStepperComponent {
+  @Input()
+  isLoading = false;
+
   isLinear = false;
   isLocked = false;
   // Note: Forms can inform stepper of incomplete steps
