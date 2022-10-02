@@ -63,7 +63,16 @@ export class TaskService {
     this.step$.next(this.visibleSteps);
   }
 
-  updateSteps(prevTask: TaskType, nextTask: TaskType) {
+  lockSteps(lastLockable: TaskType){
+    this.step$.next( this.steps.map(x=>{
+      if(x.taskType <= lastLockable){
+        x.status = TaskStatus.Locked;
+      }
+      return x;
+    }));
+  }
+
+  navigateSteps(prevTask: TaskType, nextTask: TaskType) {
     const steps = this.processTasks(prevTask, nextTask);
     this.step$.next(steps);
   }
