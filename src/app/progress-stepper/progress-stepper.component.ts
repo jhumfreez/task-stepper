@@ -43,10 +43,11 @@ export class ProgressStepperComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.taskService.activateTask(this.stepper.selectedIndex);
     // TODO: Doesn't work, so handle in route guard
-    if (!this.taskService.currentStep?.availableOnCashDeal) {
-      this.stepper.selectedIndex = TaskType.PlanSelection;
-    }
+    // if (!this.taskService.currentStep?.availableOnCashDeal) {
+    //   this.stepper.selectedIndex = TaskType.PlanSelection;
+    // }
   }
 
   selectionChanged(event: StepperSelectionEvent) {

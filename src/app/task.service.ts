@@ -43,6 +43,28 @@ export class TaskService {
     this.step$ = new BehaviorSubject(this._steps);
   }
 
+  activateTask(taskType: TaskType) {
+    this.step$.next(
+      this._steps.map((x) => {
+        if (x.taskType === taskType) {
+          x.status = TaskStatus.Active;
+        }
+        return x;
+      })
+    );
+  }
+
+  completeTask(taskType: TaskType) {
+    this.step$.next(
+      this._steps.map((x) => {
+        if (x.taskType === taskType) {
+          x.status = TaskStatus.Complete;
+        }
+        return x;
+      })
+    );
+  }
+
   getTaskByType(taskType: TaskType): Task {
     const task = this._steps.find((x) => x.taskType === taskType);
     return task ? { ...task } : null;
@@ -82,19 +104,15 @@ export class TaskService {
   private processTasks(prevTask: TaskType, nextTask: TaskType) {
     return this._steps.map((x) => {
       const inRange =
-        (prevTask < nextTask &&
-          x.taskType >= prevTask &&
-          x.taskType < nextTask) ||
-        (prevTask > nextTask &&
-          x.taskType >= nextTask &&
-          x.taskType < prevTask);
-      if (inRange) {
-        const skippable = x.optional;
-        // const isVisible = this.visibleSteps.some(x=>x.taskType === x.taskType);
-        const taskCompleted = x.status === TaskStatus.Complete;
-        if (skippable && !taskCompleted) {
-          x.status = TaskStatus.Skipped;
-        }
+        prevTask < nextTask
+          ? x.taskType >= prevTask && x.taskType < nextTask
+          : x.taskType > nextTask && x.taskType <= prevTask;
+      if (inRange && x.optional) {
+        x.status = TaskStatus.Skipped;
+      } else if (inRange) {
+        // Infer completion
+        // TODO: figure this out when implementing route guard
+        x.status = TaskStatus.Complete;
       }
       if (x.taskType === nextTask) {
         x.status = TaskStatus.Active;

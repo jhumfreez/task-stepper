@@ -48,4 +48,8 @@ export class AppComponent {
   resetSteps() {
     this.taskService.reset();
   }
+
+  completeTask() {
+    this.taskService.completeTask(this.taskService.currentStep.taskType);
+  }
 }
