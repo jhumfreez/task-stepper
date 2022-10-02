@@ -106,7 +106,7 @@ export class TaskService {
       const inRange =
         prevTask < nextTask
           ? x.taskType >= prevTask && x.taskType < nextTask
-          : x.taskType > nextTask && x.taskType <= prevTask;
+          : x.taskType <= prevTask && x.taskType > nextTask;
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
       } else if (inRange) {
