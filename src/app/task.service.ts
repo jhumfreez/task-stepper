@@ -21,6 +21,13 @@ export class TaskService {
     return this.steps.asObservable();
   }
 
+  get currentStep(): Task {
+    const currentStep = this._steps.find(
+      (task) => task.status === TaskStatus.Active
+    );
+    return currentStep ? { ...currentStep } : null;
+  }
+
   constructor() {
     this.initialize();
     this.steps = new BehaviorSubject(this._steps);

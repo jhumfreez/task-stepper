@@ -1,5 +1,6 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { BUY_ROUTE_TASK_MAP } from '../app.routing.module';
 import { TaskService } from '../task.service';
@@ -13,23 +14,29 @@ export class ProgressStepperComponent {
   @Input()
   isLoading = false;
 
+  // Note: Mat Stepper can provide info about the step (getSteps)
+  @ViewChild('stepper')
+  stepper: MatStepper;
+
   isLinear = false;
   isLocked = false;
   // Note: Forms can inform stepper of incomplete steps
   // tempForm = new FormGroup({
   //   noop: new FormControl(''),
   // });
-  // Note: Mat Stepper can provide info about the step (getSteps)
   @Input() steps: Task[] = [];
   taskStatus = TaskStatus;
   route_task_map = BUY_ROUTE_TASK_MAP;
 
-  constructor(private router: Router, private taskStepper: TaskService) {
+  constructor(private router: Router,  private taskService: TaskService) {
     // breakpointObserver: BreakpointObserver
     // Note: puts stepper in vertical orienation
     // this.$stepperOrientation = breakpointObserver
     //   .observe('(min-width: 576px)')
     //   .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+    if (!this.taskService.currentStep?.availableOnCashDeal) {
+      this.stepper.selectedIndex = TaskType.PlanSelection;
+    }
   }
 
   selectionChanged(event: StepperSelectionEvent) {
