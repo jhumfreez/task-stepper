@@ -1,7 +1,13 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { BUY_ROUTE_TASK_MAP } from '../app.routing.module';
 import { TaskService } from '../task.service';
 import { Task, TaskStatus, TaskType } from '../types';
@@ -44,6 +50,10 @@ export class ProgressStepperComponent implements AfterViewInit {
 
   selectionChanged(event: StepperSelectionEvent) {
     const routeSegment = BUY_ROUTE_TASK_MAP.get(event.selectedIndex);
+    this.taskService.navigateSteps(
+      event.previouslySelectedIndex,
+      event.selectedIndex
+    );
     this.router.navigate(['/' + routeSegment]);
   }
 }

@@ -63,13 +63,15 @@ export class TaskService {
     this.step$.next(this.visibleSteps);
   }
 
-  lockSteps(lastLockable: TaskType){
-    this.step$.next( this.steps.map(x=>{
-      if(x.taskType <= lastLockable){
-        x.status = TaskStatus.Locked;
-      }
-      return x;
-    }));
+  lockSteps(lastLockable: TaskType) {
+    this.step$.next(
+      this.steps.map((x) => {
+        if (x.taskType <= lastLockable) {
+          x.status = TaskStatus.Locked;
+        }
+        return x;
+      })
+    );
   }
 
   navigateSteps(prevTask: TaskType, nextTask: TaskType) {
