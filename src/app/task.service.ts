@@ -96,7 +96,7 @@ export class TaskService {
     );
   }
 
-  navigateSteps(prevTask: TaskType, nextTask: TaskType) {
+  handleStepNavigation(prevTask: TaskType, nextTask: TaskType) {
     const steps = this.processTasks(prevTask, nextTask);
     this.step$.next(steps);
   }
