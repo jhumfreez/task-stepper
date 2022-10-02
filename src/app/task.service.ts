@@ -103,10 +103,7 @@ export class TaskService {
 
   private processTasks(prevTask: TaskType, nextTask: TaskType) {
     return this._steps.map((x) => {
-      const inRange =
-        prevTask < nextTask
-          ? x.taskType >= prevTask && x.taskType < nextTask
-          : x.taskType <= prevTask && x.taskType > nextTask;
+      const inRange = this.taskInRange(x.taskType, prevTask, nextTask);
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
       } else if (inRange) {
@@ -119,6 +116,12 @@ export class TaskService {
       }
       return x;
     });
+  }
+
+  private taskInRange(currentTask: TaskType, prevTask: TaskType, nextTask: TaskType){
+    return prevTask < nextTask
+    ? currentTask >= prevTask && currentTask < nextTask
+    : currentTask <= prevTask && currentTask > nextTask;
   }
 
   private initialize() {
