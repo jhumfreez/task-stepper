@@ -1,5 +1,5 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { BUY_ROUTE_TASK_MAP } from '../app.routing.module';
@@ -10,7 +10,7 @@ import { Task, TaskStatus, TaskType } from '../types';
   templateUrl: './progress-stepper.component.html',
   styleUrls: ['./progress-stepper.component.scss'],
 })
-export class ProgressStepperComponent {
+export class ProgressStepperComponent implements AfterViewInit {
   @Input()
   isLoading = false;
 
@@ -28,12 +28,15 @@ export class ProgressStepperComponent {
   taskStatus = TaskStatus;
   route_task_map = BUY_ROUTE_TASK_MAP;
 
-  constructor(private router: Router,  private taskService: TaskService) {
+  constructor(private router: Router, private taskService: TaskService) {
     // breakpointObserver: BreakpointObserver
     // Note: puts stepper in vertical orienation
     // this.$stepperOrientation = breakpointObserver
     //   .observe('(min-width: 576px)')
     //   .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
+
+  ngAfterViewInit(): void {
     if (!this.taskService.currentStep?.availableOnCashDeal) {
       this.stepper.selectedIndex = TaskType.PlanSelection;
     }
