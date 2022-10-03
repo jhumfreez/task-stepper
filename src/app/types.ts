@@ -14,10 +14,9 @@ export enum TaskType {
 export enum TaskStatus {
   // Not visited, not modified
   Pristine = 'pristine',
-  // Just an idea: record section has partial data
-  // Dirty = 'dirty',
   // Task completion in progress
   Active = 'active',
+  // TODO: Consider renaming this to visited; an active task may be complete so this is kind of misleading
   Complete = 'complete',
   Skipped = 'skipped',
   Hidden = 'hidden',
