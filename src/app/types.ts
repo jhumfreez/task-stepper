@@ -16,8 +16,7 @@ export enum TaskStatus {
   Pristine = 'pristine',
   // Task completion in progress
   Active = 'active',
-  // TODO: Consider renaming this to visited; an active task may be complete so this is kind of misleading
-  Complete = 'complete',
+  Visited = 'visited',
   Skipped = 'skipped',
   Hidden = 'hidden',
   // Assumption: Locked steps cannot be hidden because task will not be re-evaluated.

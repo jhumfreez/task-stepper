@@ -50,7 +50,7 @@ export class TaskService {
   completeTask(taskType: TaskType) {
     const patch = this.getState().map((x) => {
       if (x.taskType === taskType) {
-        x.status = TaskStatus.Complete;
+        x.status = TaskStatus.Visited;
       }
       return x;
     });
@@ -94,9 +94,7 @@ export class TaskService {
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
       } else if (inRange) {
-        // Infer completion
-        // TODO: figure this out when implementing route guard
-        x.status = TaskStatus.Complete;
+        x.status = TaskStatus.Visited;
       }
       if (x.taskType === nextTask) {
         x.status = TaskStatus.Active;
