@@ -40,7 +40,6 @@ export class TaskService {
   activateTask(taskType: TaskType) {
     const patch = this.getState().map((x) => {
       if (x.taskType === taskType) {
-        // FIXME: Seems to utilize side-effect
         x.status = TaskStatus.Active;
       }
       return x;
