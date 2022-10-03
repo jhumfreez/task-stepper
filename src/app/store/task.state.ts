@@ -62,15 +62,15 @@ export class TaskState {
   }
 
   // Alternative to above, for funsies or something
-  @Action(UpdateTask)
-  updateTaskAlt(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
-    ctx.setState(
-      patch<TaskStateModel>({
-        tasks: updateItem<Task>(
-          (stateTask: Task) => stateTask.taskType === action.task.taskType,
-          action.task
-        ),
-      })
-    );
-  }
+  // @Action(UpdateTask)
+  // updateTaskAlt(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
+  //   ctx.setState(
+  //     patch<TaskStateModel>({
+  //       tasks: updateItem<Task>(
+  //         (stateTask: Task) => stateTask.taskType === action.task.taskType,
+  //         action.task
+  //       ),
+  //     })
+  //   );
+  // }
 }
