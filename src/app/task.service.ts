@@ -29,6 +29,8 @@ export class TaskService {
     const currentStep = this.getState().find(
       (task) => task.status === TaskStatus.Active
     );
+    // Return copy to follow principle of immutability
+    // Reference: https://indepth.dev/posts/1381/immutability-importance-in-angular-applications
     return currentStep ? { ...currentStep } : null;
   }
 
