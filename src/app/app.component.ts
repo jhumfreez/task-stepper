@@ -24,7 +24,7 @@ export class AppComponent {
     private fakeDealService: SimpleDealHttpService,
     private taskService: TaskService
   ) {
-    this.task$ = this.taskService.getSteps();
+    this.task$ = this.taskService.steps;
   }
   setCashDeal() {
     this.toggleLoadingState();

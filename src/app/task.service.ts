@@ -13,26 +13,20 @@ export class TaskService {
   readonly step$: BehaviorSubject<Task[]>;
 
   get visibleSteps() {
-    return this._steps
+    return this.getState()
       .filter((steps) => steps.status !== TaskStatus.Hidden)
       .map((x) => {
         return { ...x };
       });
   }
 
-  private get steps() {
-    return this._steps.map((x) => {
-      return { ...x };
-    });
-  }
-
-  getSteps() {
+  get steps() {
     // Not returning behavior subject to guard against updates from multiple sources
     return this.step$.asObservable();
   }
 
   get currentStep(): Task {
-    const currentStep = this._steps.find(
+    const currentStep = this.getState().find(
       (task) => task.status === TaskStatus.Active
     );
     return currentStep ? { ...currentStep } : null;
@@ -44,41 +38,40 @@ export class TaskService {
   }
 
   activateTask(taskType: TaskType) {
-    this.step$.next(
-      this._steps.map((x) => {
-        if (x.taskType === taskType) {
-          // FIXME: Seems to utilize side-effect
-          x.status = TaskStatus.Active;
-        }
-        return x;
-      })
-    );
+    const patch = this.getState().map((x) => {
+      if (x.taskType === taskType) {
+        // FIXME: Seems to utilize side-effect
+        x.status = TaskStatus.Active;
+      }
+      return x;
+    });
+    this.patchState(patch);
   }
 
   completeTask(taskType: TaskType) {
-    this.step$.next(
-      this._steps.map((x) => {
-        if (x.taskType === taskType) {
-          x.status = TaskStatus.Complete;
-        }
-        return x;
-      })
-    );
+    const patch = this.getState().map((x) => {
+      if (x.taskType === taskType) {
+        x.status = TaskStatus.Complete;
+      }
+      return x;
+    });
+    this.patchState(patch);
   }
 
   getTaskByType(taskType: TaskType): Task {
-    const task = this._steps.find((x) => x.taskType === taskType);
+    const task = this.getState().find((x) => x.taskType === taskType);
     return task ? { ...task } : null;
   }
 
   // TODO: Handle navigation or guard route when activated route isn't visible.
   handleCashDeal() {
-    this._steps.forEach((step) => {
+    const patch = this.getState().map((step) => {
       if (!step.availableOnCashDeal) {
         step.status = TaskStatus.Hidden;
       }
+      return step;
     });
-    this.step$.next(this.visibleSteps);
+    this.patchState(patch);
   }
 
   reset() {
@@ -87,23 +80,17 @@ export class TaskService {
   }
 
   lockSteps(lastLockable: TaskType) {
-    this.step$.next(
-      this.steps.map((x) => {
-        if (x.taskType <= lastLockable) {
-          x.status = TaskStatus.Locked;
-        }
-        return x;
-      })
-    );
+    const patch = this.getState().map((x) => {
+      if (x.taskType <= lastLockable) {
+        x.status = TaskStatus.Locked;
+      }
+      return x;
+    });
+    this.patchState(patch);
   }
 
   navigateSteps(prevTask: TaskType, nextTask: TaskType) {
-    const steps = this.processTasks(prevTask, nextTask);
-    this.step$.next(steps);
-  }
-
-  private processTasks(prevTask: TaskType, nextTask: TaskType) {
-    return this._steps.map((x) => {
+    const patch = this.getState().map((x) => {
       const inRange = this.taskInRange(x.taskType, prevTask, nextTask);
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
@@ -117,6 +104,7 @@ export class TaskService {
       }
       return x;
     });
+    this.patchState(patch);
   }
 
   private taskInRange(
@@ -127,6 +115,18 @@ export class TaskService {
     return prevTask < nextTask
       ? currentTask >= prevTask && currentTask < nextTask
       : currentTask <= prevTask && currentTask > nextTask;
+  }
+
+  private getState(): Task[] {
+    return this._steps.map((x) => {
+      return { ...x };
+    });
+  }
+
+  private patchState(steps: Task[]) {
+    this._steps = steps;
+    // dependencies don't need to know about steps that aren't available.
+    this.step$.next(this.visibleSteps);
   }
 
   private initialize() {
