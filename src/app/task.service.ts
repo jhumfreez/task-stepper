@@ -47,6 +47,7 @@ export class TaskService {
     this.step$.next(
       this._steps.map((x) => {
         if (x.taskType === taskType) {
+          // FIXME: Seems to utilize side-effect
           x.status = TaskStatus.Active;
         }
         return x;
@@ -118,10 +119,14 @@ export class TaskService {
     });
   }
 
-  private taskInRange(currentTask: TaskType, prevTask: TaskType, nextTask: TaskType){
+  private taskInRange(
+    currentTask: TaskType,
+    prevTask: TaskType,
+    nextTask: TaskType
+  ) {
     return prevTask < nextTask
-    ? currentTask >= prevTask && currentTask < nextTask
-    : currentTask <= prevTask && currentTask > nextTask;
+      ? currentTask >= prevTask && currentTask < nextTask
+      : currentTask <= prevTask && currentTask > nextTask;
   }
 
   private initialize() {
