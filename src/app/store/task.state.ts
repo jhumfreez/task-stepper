@@ -3,6 +3,7 @@ import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
 import { Task, TaskStatus } from '../types';
 import { SetTasks, UpdateTask } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
+import { mockTasks } from '../mocks/stepper.mock';
 
 /**
  * Benefits:
@@ -19,7 +20,7 @@ const TASK_STATE_TOKEN = new StateToken<TaskStateModel>('tasks');
 @State<TaskStateModel>({
   name: TASK_STATE_TOKEN,
   defaults: {
-    tasks: [],
+    tasks: mockTasks,
   },
 })
 // https://angular.io/api/core/Injectable
@@ -37,10 +38,16 @@ export class TaskState {
       .tasks.find((tasks) => tasks.status === TaskStatus.Active);
   }
 
+  // TODO: Get current task
+
   @Action(SetTasks)
   setTasks(ctx: StateContext<TaskStateModel>, action: SetTasks) {
     ctx.setState(patch<TaskStateModel>({ tasks: action.tasks }));
   }
+
+  // TODO: Lock tasks
+
+  // TODO: Process tasks on navigation
 
   @Action(UpdateTask)
   updateTask(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
