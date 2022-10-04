@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
-import { Task, TaskStatus } from '../types';
-import { SetTasks, UpdateTask } from './task.actions';
+import { Task, TaskStatus, TaskType } from '../types';
+import { LockTasks, SetTasks, UpdateTask } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { mockTasks } from '../mocks/stepper.mock';
 
@@ -45,7 +45,17 @@ export class TaskState {
     ctx.setState(patch<TaskStateModel>({ tasks: action.tasks }));
   }
 
-  // TODO: Lock tasks
+  @Action(LockTasks)
+  lockTasks(ctx: StateContext<TaskStateModel>, action: SetTasks) {
+    const finalLockableStep = TaskType.CreditApp;
+    const patch = ctx.getState().tasks.map((x) => {
+      if (x.taskType <= finalLockableStep) {
+        x.status = TaskStatus.Locked;
+      }
+      return x;
+    });
+    ctx.setState({ ...ctx.getState(), tasks: patch });
+  }
 
   // TODO: Process tasks on navigation
 
