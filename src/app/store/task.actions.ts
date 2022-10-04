@@ -1,4 +1,4 @@
-import { Task } from '../types';
+import { TaskType, Task } from '../types';
 
 export class SetTasks {
   static readonly type = '[Task] Overwrite Task List';
@@ -17,5 +17,5 @@ export class LockTasks {
 
 export class ProcessTasks {
   static readonly type = '[Task] Process Task List';
-  constructor() {}
+  constructor(public prevTask: TaskType, public nextTask: TaskType) {}
 }

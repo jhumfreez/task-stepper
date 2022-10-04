@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
 import { Task, TaskStatus, TaskType } from '../types';
-import { LockTasks, SetTasks, UpdateTask } from './task.actions';
+import { LockTasks, ProcessTasks, SetTasks, UpdateTask } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { mockTasks } from '../mocks/stepper.mock';
 
@@ -46,7 +46,7 @@ export class TaskState {
   }
 
   @Action(LockTasks)
-  lockTasks(ctx: StateContext<TaskStateModel>, action: SetTasks) {
+  lockTasks(ctx: StateContext<TaskStateModel>, action: LockTasks) {
     const finalLockableStep = TaskType.CreditApp;
     const patch = ctx.getState().tasks.map((x) => {
       if (x.taskType <= finalLockableStep) {
@@ -57,7 +57,26 @@ export class TaskState {
     ctx.setState({ ...ctx.getState(), tasks: patch });
   }
 
-  // TODO: Process tasks on navigation
+  @Action(ProcessTasks)
+  processTasks(ctx: StateContext<TaskStateModel>, action: ProcessTasks) {
+    const patch = ctx.getState().tasks.map((x) => {
+      const inRange = this.taskInRange(
+        x.taskType,
+        action.prevTask,
+        action.nextTask
+      );
+      if (inRange && x.optional) {
+        x.status = TaskStatus.Skipped;
+      } else if (inRange) {
+        x.status = TaskStatus.Visited;
+      }
+      if (x.taskType === action.nextTask) {
+        x.status = TaskStatus.Active;
+      }
+      return x;
+    });
+    ctx.setState({ ...ctx.getState(), tasks: patch });
+  }
 
   @Action(UpdateTask)
   updateTask(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
@@ -83,4 +102,14 @@ export class TaskState {
   //     })
   //   );
   // }
+
+  private taskInRange(
+    currentTask: TaskType,
+    prevTask: TaskType,
+    nextTask: TaskType
+  ) {
+    return prevTask < nextTask
+      ? currentTask >= prevTask && currentTask < nextTask
+      : currentTask <= prevTask && currentTask > nextTask;
+  }
 }
