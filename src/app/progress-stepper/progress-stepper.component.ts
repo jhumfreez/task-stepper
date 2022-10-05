@@ -20,27 +20,17 @@ export class ProgressStepperComponent implements AfterViewInit {
   @Input()
   isLoading = false;
 
-  // Note: Mat Stepper can provide info about the step (getSteps)
   @ViewChild('stepper')
   stepper: MatStepper;
 
   isLinear = false;
   isLocked = false;
-  // Note: Forms can inform stepper of incomplete steps
-  // tempForm = new FormGroup({
-  //   noop: new FormControl(''),
-  // });
+
   @Input() steps: Task[] = [];
   taskStatus = TaskStatus;
   route_task_map = BUY_ROUTE_TASK_MAP;
 
-  constructor(private router: Router, private taskService: TaskService) {
-    // breakpointObserver: BreakpointObserver
-    // Note: puts stepper in vertical orienation
-    // this.$stepperOrientation = breakpointObserver
-    //   .observe('(min-width: 576px)')
-    //   .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-  }
+  constructor(private router: Router, private taskService: TaskService) {}
 
   ngAfterViewInit(): void {
     this.taskService.activateTask(this.stepper.selectedIndex);
