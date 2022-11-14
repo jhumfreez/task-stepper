@@ -14,21 +14,9 @@ import { Task } from '../types';
   templateUrl: './filler.component.html',
   styleUrls: ['./filler.component.css'],
 })
-export class FillerComponent implements OnInit {
+export class FillerComponent {
   // @Input()
   // step: Task;
   // title: string;
-  constructor(private store: Store, protected route: ActivatedRoute, protected taskService: TaskService) {
-
-  }
-
-  ngOnInit() {
-    this.completeStep();
-  }
-
-  completeStep() {
-    // this.taskService.completeTask(this.taskService.currentStep.taskType);
-    // FIXME
-    // this.store.dispatch(new CompleteTask(this.step.taskType));
-  }
+  constructor(protected taskService: TaskService) { }
 }
