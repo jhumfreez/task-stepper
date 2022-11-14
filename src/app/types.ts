@@ -31,3 +31,14 @@ export interface Task {
   optional: boolean;
   availableOnCashDeal: boolean;
 }
+
+export class Task {
+  constructor(
+    public label: string,
+    public taskType: TaskType,
+    public availableOnCashDeal: boolean,
+    public optional: boolean = true
+  ) {
+    this.status = TaskStatus.Pristine;
+  }
+}
