@@ -51,4 +51,5 @@ export interface TaskChangeEvent {
   nextTask: TaskType;
 }
 
-export type Tasks = Task[] | Readonly<Task>[];
+export type LockedTask = Readonly<Task>;
+export type Tasks = Task[] | LockedTask[];
