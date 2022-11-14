@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
-import { Task } from '../types';
-import { mockTasks } from './stepper.mock';
+import { INIT_TASKS } from '../constants';
+import { Task, Tasks } from '../types';
 
 export interface FakeHttpService<T> {
   fetchMockData(expectedResult?: T): Observable<T>;
@@ -12,7 +12,9 @@ export interface FakeHttpService<T> {
   providedIn: 'root',
 })
 export class MockTasksHttpService implements FakeHttpService<Task[]> {
-  fetchMockData(expectedResult = mockTasks): Observable<Task[]> {
+  fetchMockData(
+    expectedResult: Tasks = structuredClone(INIT_TASKS)
+  ): Observable<Task[]> {
     return of(expectedResult).pipe(delay(2000));
   }
 }
