@@ -1,6 +1,8 @@
 <app-progress-stepper
   [steps]="task$ | async"
   [isLoading]="isLoading"
+  (activateTask)="activateTask($event)"
+  (taskChanged)="taskChanged($event)"
 ></app-progress-stepper>
 <!-- <button mat-raised-button color="primary" (click)="completeTask()" class="btn">
   Mark Step Complete
@@ -11,3 +13,8 @@
 <button mat-raised-button color="warn" (click)="resetSteps()" class="btn">
   Reset Steps
 </button>
+
+<div *ngIf="debug">
+  <p>Task State:</p>
+  <p>{{ task$ | async | json }}</p>
+</div>

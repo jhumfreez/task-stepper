@@ -42,3 +42,8 @@ export class Task {
     this.status = TaskStatus.Pristine;
   }
 }
+
+export interface TaskChangeEvent {
+  prevTask: TaskType,
+  nextTask: TaskType
+}

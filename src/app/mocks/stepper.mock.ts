@@ -1,4 +1,4 @@
-import { Task, TaskStatus, TaskType } from '../types';
+import { Task, TaskType } from '../types';
 
 export const mockTasks: Task[] = [
   new Task('Create Your Deal', TaskType.PlanSelection, true, false),
