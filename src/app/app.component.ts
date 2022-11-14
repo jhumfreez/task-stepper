@@ -20,15 +20,12 @@ import { Task, TaskChangeEvent, Tasks, TaskType } from './types';
 })
 export class AppComponent {
   debug = true;
-  task$: Observable<Tasks>;
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
     protected taskService: TaskService,
     private router: Router
-  ) {
-    this.task$ = this.taskService.steps;
-  }
+  ) {}
 
   activateTask(taskType: TaskType) {
     this.taskService.activateTask(taskType);

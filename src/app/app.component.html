@@ -1,5 +1,5 @@
 <app-progress-stepper
-  [steps]="task$ | async"
+  [steps]="this.taskService.steps | async"
   [isLoading]="isLoading"
   (activateTask)="activateTask($event)"
   (taskChanged)="taskChanged($event)"
@@ -16,5 +16,5 @@
 
 <div *ngIf="debug">
   <p>Task State:</p>
-  <p>{{ task$ | async | json }}</p>
+  <p>{{ this.taskService.steps | async | json }}</p>
 </div>
