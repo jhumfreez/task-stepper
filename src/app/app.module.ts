@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExampleComponent } from './example-component/example-component.component';
 import { AppRoutingModule } from './app.routing.module';
+import { FillerComponent } from './filler-component/filler.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { AppRoutingModule } from './app.routing.module';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AppComponent, ExampleComponent, ProgressStepperComponent],
+  declarations: [AppComponent, ExampleComponent, ProgressStepperComponent,FillerComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

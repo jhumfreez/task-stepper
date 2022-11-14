@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
 import { Task, TaskStatus, TaskType } from '../types';
-import { LockTasks, ProcessTasks, SetTasks, UpdateTask } from './task.actions';
+import { CompleteTask, LockTasks, ProcessTasks, SetTasks, UpdateTask } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
 import { mockTasks } from '../mocks/stepper.mock';
+import { X } from '@angular/cdk/keycodes';
 
 /**
  * Benefits:
@@ -102,6 +103,17 @@ export class TaskState {
   //     })
   //   );
   // }
+
+  @Action(CompleteTask)
+  completeTask(ctx: StateContext<TaskStateModel>, action: CompleteTask) {
+    const taskList = ctx.getState().tasks.map((x: Task) => {
+      if (x.taskType === action.currentTask) {
+        x.status = TaskStatus.Visited;
+      }
+      return x;
+    });
+    ctx.setState(patch<TaskStateModel>({ tasks: taskList }));
+  }
 
   private taskInRange(
     currentTask: TaskType,
