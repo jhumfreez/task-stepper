@@ -20,6 +20,7 @@ export enum TaskStatus {
   Skipped = 'skipped',
   Hidden = 'hidden',
   // Assumption: Locked steps cannot be hidden because task will not be re-evaluated.
+  // Task is read-only and cannot be visited
   Locked = 'locked',
 }
 
@@ -44,6 +45,6 @@ export class Task {
 }
 
 export interface TaskChangeEvent {
-  prevTask: TaskType,
-  nextTask: TaskType
+  prevTask: TaskType;
+  nextTask: TaskType;
 }

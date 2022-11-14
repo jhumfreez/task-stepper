@@ -1,4 +1,5 @@
 <h3>Welcome to: {{ this.taskService.currentStep.label }}</h3>
+<p>Task Status: {{ this.taskService.currentStep.status | titlecase}}</p>
 <!-- <p>Welcome to: {{ this.route.title | async }}</p> -->
 <!-- <label>Complete task?</label> -->
 <!-- <button id="btn" (click)="completeStep()">Yes</button> -->
