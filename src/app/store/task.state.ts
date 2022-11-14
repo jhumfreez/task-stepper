@@ -9,7 +9,7 @@ import {
   UpdateTask,
 } from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
-import { INIT_TASKS } from '../mocks/stepper.mock';
+import { INIT_TASKS } from '../constants';
 
 /**
  * Benefits:

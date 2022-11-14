@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { INIT_TASKS } from './mocks/stepper.mock';
+import { INIT_TASKS } from './constants';
 import { LastLockableTask, Task, Tasks, TaskStatus, TaskType } from './types';
 
 @Injectable({
