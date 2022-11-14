@@ -27,7 +27,7 @@ export enum TaskStatus {
 }
 
 export interface Task {
-  label: string;
+  label: Readonly<string>;
   taskType: Readonly<TaskType>;
   // Some tasks cannot be skipped
   optional: Readonly<boolean>;
@@ -35,13 +35,15 @@ export interface Task {
   status: TaskStatus;
 }
 
+export type TaskConfig = Pick<Task, 'label'|'taskType'|'optional'|'availableOnCashDeal'>;
+
 // Note: Uncertain about handling for stand alone steps/pages
 export class Task {
   constructor(
     public label: string,
     public taskType: Readonly<TaskType>,
-    public availableOnCashDeal: Readonly<boolean> = true,
-    public optional: Readonly<boolean> = true
+    public availableOnCashDeal: boolean = true,
+    public optional: boolean = true
   ) {
     this.status = TaskStatus.Pristine;
   }

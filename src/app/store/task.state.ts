@@ -86,7 +86,7 @@ export class TaskState {
 
   @Action(UpdateTask)
   updateTask(ctx: StateContext<TaskStateModel>, action: UpdateTask) {
-    const taskList = ctx.getState().tasks.map((x: Task) => {
+    const taskList = ctx.getState().tasks.map((x: Task): Task => {
       if (x.taskType === action.task.taskType) {
         return { ...action.task };
       }

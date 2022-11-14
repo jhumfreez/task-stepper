@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { TASK_CONFIG } from './constants';
 import { ExampleComponent } from './example-component/example-component.component';
 import { FillerComponent } from './filler-component/filler.component';
 import { TaskType } from './types';
@@ -50,7 +51,7 @@ const routes: Routes = [
         component: FillerComponent,
         // Not sure if I want to use this or not
         data: {
-          taskType: TaskType.PlanSelection
+          config: TASK_CONFIG[TaskType.PlanSelection]
         }
       },
       {
