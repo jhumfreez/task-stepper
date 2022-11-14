@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ExampleComponent } from './example-component/example-component.component';
+import { FillerComponent } from './filler-component/filler.component';
 import { TaskType } from './types';
 
 /**
@@ -46,7 +47,11 @@ const routes: Routes = [
       {
         path: RoutePath.PlanSelection,
         title: 'Create Your Deal',
-        component: ExampleComponent,
+        component: FillerComponent,
+        // Not sure if I want to use this or not
+        data: {
+          taskType: TaskType.PlanSelection
+        }
       },
       {
         path: RoutePath.Profile,
@@ -56,27 +61,27 @@ const routes: Routes = [
       {
         path: RoutePath.TradeIn,
         title: 'Trade-in',
-        component: ExampleComponent,
+        component: FillerComponent,
       },
       {
         path: RoutePath.Accessories,
         title: 'Accessories',
-        component: ExampleComponent,
+        component: FillerComponent,
       },
       {
         path: RoutePath.FIProducts,
         title: 'F&I Products',
-        component: ExampleComponent,
+        component: FillerComponent,
       },
       {
         path: RoutePath.CreditApp,
         title: 'Credit App',
-        component: ExampleComponent,
+        component: FillerComponent,
       },
       {
         path: RoutePath.DocumentUpload,
         title: 'Documents',
-        component: ExampleComponent,
+        component: FillerComponent,
       },
       {
         path: RoutePath.ScheduleDelivery,
