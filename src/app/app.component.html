@@ -16,5 +16,5 @@
 
 <div *ngIf="debug">
   <p>Task State:</p>
-  <p>{{ this.taskService.steps | async | json }}</p>
+  <p>{{ this.taskService.currentStep | json }}</p>
 </div>

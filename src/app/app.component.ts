@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { finalize, Observable } from 'rxjs';
+import { finalize } from 'rxjs';
 import { BUY_ROUTE_TASK_MAP } from './app.routing.module';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
 import { TaskService } from './task.service';
-import { Task, TaskChangeEvent, Tasks, TaskType } from './types';
+import { Task, TaskChangeEvent, TaskType } from './types';
 /**
  * Goals:
  * - Update step/task list on navigation or upon arrival on routed component after.
@@ -19,7 +19,7 @@ import { Task, TaskChangeEvent, Tasks, TaskType } from './types';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  debug = true;
+  debug = false;
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
@@ -29,10 +29,6 @@ export class AppComponent {
 
   activateTask(taskType: TaskType) {
     this.taskService.activateTask(taskType);
-    // TODO: Doesn't work, so handle in route guard
-    // if (!this.taskService.currentStep?.availableOnCashDeal) {
-    //   this.stepper.selectedIndex = TaskType.PlanSelection;
-    // }
   }
 
   taskChanged(taskChange: TaskChangeEvent) {
