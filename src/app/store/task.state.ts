@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Action, Select, State, StateContext, StateToken } from '@ngxs/store';
 import { Task, TaskStatus, TaskType } from '../types';
-import { CompleteTask, LockTasks, ProcessTasks, SetTasks, UpdateTask } from './task.actions';
+import {
+  CompleteTask,
+  LockTasks,
+  ProcessTasks,
+  SetTasks,
+  UpdateTask,
+} from './task.actions';
 import { patch, updateItem } from '@ngxs/store/operators';
-import { mockTasks } from '../mocks/stepper.mock';
-import { X } from '@angular/cdk/keycodes';
+import { INIT_TASKS } from '../mocks/stepper.mock';
 
 /**
  * Benefits:
@@ -21,7 +26,7 @@ const TASK_STATE_TOKEN = new StateToken<TaskStateModel>('tasks');
 @State<TaskStateModel>({
   name: TASK_STATE_TOKEN,
   defaults: {
-    tasks: mockTasks,
+    tasks: INIT_TASKS,
   },
 })
 // https://angular.io/api/core/Injectable

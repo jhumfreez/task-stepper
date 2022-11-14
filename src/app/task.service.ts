@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { mockTasks } from './mocks/stepper.mock';
-import { Task, Tasks, TaskStatus, TaskType } from './types';
+import { INIT_TASKS } from './mocks/stepper.mock';
+import { LastLockableTask, Task, Tasks, TaskStatus, TaskType } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -80,7 +80,7 @@ export class TaskService {
     this.step$.next(this.visibleSteps);
   }
 
-  lockSteps(lastLockable: TaskType) {
+  lockSteps(lastLockable: LastLockableTask) {
     const patch = this.getState().map((x) => {
       if (x.taskType <= lastLockable) {
         x.status = TaskStatus.Locked;
@@ -118,9 +118,7 @@ export class TaskService {
   }
 
   private getState(): Tasks {
-    return this._steps.map((x) => {
-      return { ...x };
-    });
+    return structuredClone(this._steps);
   }
 
   private patchState(steps: Tasks) {
@@ -130,8 +128,10 @@ export class TaskService {
   }
 
   private initialize() {
-    this._steps = mockTasks.map((task) => {
-      return { ...task };
-    });
+    this._steps = structuredClone(INIT_TASKS);
+    // NOTE: Alternative approach to cloning list below...
+    // this._steps = INIT_TASKS.map((task) => {
+    //   return { ...task };
+    // });
   }
 }

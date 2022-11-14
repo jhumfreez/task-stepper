@@ -1,6 +1,6 @@
 import { Task, TaskType } from '../types';
 
-export const mockTasks: Task[] = [
+export const INIT_TASKS: Task[] = [
   new Task('Create Your Deal', TaskType.PlanSelection, true, false),
   new Task('Profile', TaskType.Profile, true, false),
   new Task('Trade-in',TaskType.TradeIn, true),

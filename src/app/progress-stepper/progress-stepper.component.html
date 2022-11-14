@@ -16,6 +16,7 @@
     [orientation]="'horizontal'"
     (selectionChange)="selectionChanged($event)"
   >
+  <!-- NOTE: editable can act as a route guard -->
     <mat-step
       *ngFor="let step of steps; index as i"
       [label]="step.label"

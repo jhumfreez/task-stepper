@@ -9,6 +9,8 @@ export enum TaskType {
   ScheduleDelivery,
 }
 
+export type LastLockableTask = TaskType.CreditApp | TaskType.DocumentUpload;
+
 // Just an idea: mutually exclusive states
 // However: What happens when a step is invalidated or hidden, and then it comes back after being completed? Should it be reset?
 export enum TaskStatus {
