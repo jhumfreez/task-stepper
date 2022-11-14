@@ -48,3 +48,5 @@ export interface TaskChangeEvent {
   prevTask: TaskType;
   nextTask: TaskType;
 }
+
+export type Tasks = Task[] | Readonly<Task>[];

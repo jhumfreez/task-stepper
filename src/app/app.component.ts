@@ -4,7 +4,7 @@ import { finalize, Observable } from 'rxjs';
 import { BUY_ROUTE_TASK_MAP } from './app.routing.module';
 import { SimpleDealHttpService } from './mocks/fake.http.service';
 import { TaskService } from './task.service';
-import { Task, TaskChangeEvent, TaskType } from './types';
+import { Task, TaskChangeEvent, Tasks, TaskType } from './types';
 /**
  * Goals:
  * - Update step/task list on navigation or upon arrival on routed component after.
@@ -20,8 +20,7 @@ import { Task, TaskChangeEvent, TaskType } from './types';
 })
 export class AppComponent {
   debug = true;
-  steps: Task[] = [];
-  task$: Observable<Task[]>;
+  task$: Observable<Tasks>;
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { mockTasks } from './mocks/stepper.mock';
-import { Task, TaskStatus, TaskType } from './types';
+import { Task, Tasks, TaskStatus, TaskType } from './types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
   // TODO: Move to state selector
-  private _steps: Task[];
+  private _steps: Tasks;
 
-  readonly step$: BehaviorSubject<Task[]>;
+  readonly step$: BehaviorSubject<Tasks>;
 
   get visibleSteps() {
     return this.getState()
@@ -66,7 +66,7 @@ export class TaskService {
 
   // TODO: Handle navigation or guard route when activated route isn't visible.
   handleCashDeal() {
-    const patch = this.getState().map((step) => {
+    const patch: Tasks = this.getState().map((step) => {
       if (!step.availableOnCashDeal) {
         step.status = TaskStatus.Hidden;
       }
@@ -84,6 +84,7 @@ export class TaskService {
     const patch = this.getState().map((x) => {
       if (x.taskType <= lastLockable) {
         x.status = TaskStatus.Locked;
+        return Object.freeze(x);
       }
       return x;
     });
@@ -116,13 +117,13 @@ export class TaskService {
       : currentTask <= prevTask && currentTask > nextTask;
   }
 
-  private getState(): Task[] {
+  private getState(): Tasks {
     return this._steps.map((x) => {
       return { ...x };
     });
   }
 
-  private patchState(steps: Task[]) {
+  private patchState(steps: Tasks) {
     this._steps = steps;
     // dependencies don't need to know about steps that aren't available.
     this.step$.next(this.visibleSteps);
