@@ -7,6 +7,18 @@ export interface FakeHttpService<T> {
   fetchMockData(expectedResult?: T): Observable<T>;
 }
 
+// TODO: Use this instead of the other implementations below, more re-usable.
+@Injectable({
+  providedIn: 'root',
+})
+export class MockHttpService implements FakeHttpService<unknown> {
+  fetchMockData(
+    expectedResult: unknown = structuredClone([1, 2, 3, 4, 5, 6])
+  ): Observable<unknown> {
+    return of(expectedResult).pipe(delay(2000));
+  }
+}
+
 // Tasks aren't remote but depend on remote calls, need to work out a simulation; for now, this is a placeholder
 @Injectable({
   providedIn: 'root',
