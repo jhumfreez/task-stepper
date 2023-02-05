@@ -2,7 +2,7 @@ import { Task, TaskConfig, TaskType } from './types';
 import { extractConfig } from './utils';
 
 export const INIT_TASKS: Task[] = [
-  new Task('Create Your Deal', TaskType.PlanSelection, true, false),
+  new Task('Choose Your Deal', TaskType.PlanSelection, true, false),
   new Task('Profile', TaskType.Profile, true, false),
   new Task('Trade-in', TaskType.TradeIn, true, true),
   new Task('Accessories', TaskType.Accessories, true, true),
