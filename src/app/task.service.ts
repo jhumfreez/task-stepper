@@ -83,8 +83,7 @@ export class TaskService {
   }
 
   reset() {
-    this.initialize();
-    this._step$.next(this.visibleSteps);
+    this.patchState(INIT_TASKS);
   }
 
   lockSteps(lastLockable: LastLockableTask) {
@@ -99,15 +98,18 @@ export class TaskService {
   }
 
   navigateSteps(prevTask: TaskType, nextTask: TaskType) {
-    const patch = this.getState().map((x) => {
+    const patch = this.getState().map((x: Task) => {
       const inRange = this.taskInRange(x.taskType, prevTask, nextTask);
+      if (x.taskType === prevTask) {
+        x.status = null;
+      } else if (x.taskType === nextTask) {
+        x.status = TaskStatus.Active;
+      }
+      
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
       } else if (inRange) {
         x.status = TaskStatus.Visited;
-      }
-      if (x.taskType === nextTask) {
-        x.status = TaskStatus.Active;
       }
       return x;
     });
