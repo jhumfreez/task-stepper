@@ -61,6 +61,6 @@ export class AppComponent {
   }
 
   completeTask() {
-    this.taskService.completeTask(this.taskService.currentStep.taskType);
+    this.taskService.completeTask(this.taskService.currentStep?.taskType);
   }
 }

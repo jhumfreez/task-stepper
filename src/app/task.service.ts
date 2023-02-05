@@ -31,7 +31,14 @@ export class TaskService {
     );
     // Return copy to follow principle of immutability
     // Reference: https://indepth.dev/posts/1381/immutability-importance-in-angular-applications
-    return currentStep ?? null;
+    return currentStep ?? this.farthestVisited;
+  }
+
+  get farthestVisited(): Task {
+    const visitedSteps = this.getState().filter(
+      (x) => x.status === TaskStatus.Visited
+    );
+    return visitedSteps.slice(-1)[0] ?? null;
   }
 
   constructor() {
@@ -130,8 +137,8 @@ export class TaskService {
     this._step$.next(this.visibleSteps);
   }
 
-  private initialize() {
-    this._steps = structuredClone(INIT_TASKS);
+  private initialize(tasks = INIT_TASKS) {
+    this._steps = structuredClone(tasks);
     // NOTE: Alternative approach to cloning list below...
     // this._steps = INIT_TASKS.map((task) => {
     //   return { ...task };
