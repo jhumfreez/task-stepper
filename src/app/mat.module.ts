@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Note about shared modules: https://angular.io/guide/ngmodule-faq#why-is-it-bad-if-a-shared-module-provides-a-service-to-a-lazy-loaded-module
 // More concerns: https://leandromerli.com/angular-dont-use-shared-modules/
 
@@ -25,10 +25,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatInputModule,
     // list of icon fonts: https://fonts.google.com/icons
     /* Tip:
-    In thinking about accessibility, it is useful to place icon use into one of three categories:
-    Decorative: the icon conveys no real semantic meaning and is purely cosmetic.
-    Interactive: a user will click or otherwise interact with the icon to perform some action.
-    Indicator: the icon is not interactive, but it conveys some information, such as a status. This includes using the icon in place of text inside of a larger message.
+    In thinking about accessibility, it is useful to place icon use into one of three categories...
+    1) Decorative: the icon conveys no real semantic meaning and is purely cosmetic.
+    2) Interactive: a user will click or otherwise interact with the icon to perform some action.
+    3) Indicator: the icon is not interactive, but it conveys some information, such as a status. This includes using the icon in place of text inside of a larger message.
     */
     /* Tip 2: 
     Theming: 
@@ -39,7 +39,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -52,7 +52,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
 })
 export class MatModule {}

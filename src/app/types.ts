@@ -3,7 +3,7 @@ export enum TaskType {
   Profile,
   TradeIn,
   Accessories,
-  FIProducts,
+  Products,
   CreditApp,
   DocumentUpload,
   ScheduleDelivery,
@@ -35,7 +35,10 @@ export interface Task {
   status: TaskStatus;
 }
 
-export type TaskConfig = Pick<Task, 'label'|'taskType'|'optional'|'availableOnCashDeal'>;
+export type TaskConfig = Pick<
+  Task,
+  'label' | 'taskType' | 'optional' | 'availableOnCashDeal'
+>;
 
 // Note: Uncertain about handling for stand alone steps/pages
 export class Task {

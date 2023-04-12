@@ -23,6 +23,7 @@ export class AppComponent {
   isLoading = false;
   constructor(
     private fakeDealService: SimpleDealHttpService,
+    // TODO: Move task management to Store
     protected taskService: TaskService,
     private router: Router
   ) {}

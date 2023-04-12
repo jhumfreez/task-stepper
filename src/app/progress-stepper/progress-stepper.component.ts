@@ -23,6 +23,7 @@ export class ProgressStepperComponent implements AfterViewInit {
 
   @Input() isLoading = false;
 
+  // TODO
   @Input() steps: Task[] = [];
 
   @Output() activateTask = new EventEmitter<TaskType>();
@@ -34,13 +35,14 @@ export class ProgressStepperComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
+    // FIXME: Should not activate task every CD cycle!
     this.activateTask.emit(this.stepper.selectedIndex);
   }
 
   selectionChanged(event: StepperSelectionEvent) {
     this.taskChanged.emit({
       prevTask: event.previouslySelectedIndex,
-      nextTask: event.selectedIndex
+      nextTask: event.selectedIndex,
     });
   }
 }
