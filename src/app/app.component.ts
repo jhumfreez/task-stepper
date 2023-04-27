@@ -38,9 +38,9 @@ export class AppComponent {
     this.router.navigate(['/' + routeSegment]);
   }
 
-  setCashDeal() {
+  setAvailable() {
     this.toggleLoadingState();
-    // Determine cash only status
+    // Determine available status
     this.fakeDealService
       .fetchMockData(true)
       .pipe(finalize(() => this.toggleLoadingState()))
