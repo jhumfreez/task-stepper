@@ -3,6 +3,8 @@ import { BehaviorSubject, filter, map, Observable } from 'rxjs';
 import { INIT_TASKS } from './constants';
 import { LastLockableTask, Task, Tasks, TaskStatus, TaskType } from './types';
 
+// TODO: Move this into the state
+
 @Injectable({
   providedIn: 'root',
 })
@@ -105,7 +107,7 @@ export class TaskService {
       } else if (x.taskType === nextTask) {
         x.status = TaskStatus.Active;
       }
-      
+
       if (inRange && x.optional) {
         x.status = TaskStatus.Skipped;
       } else if (inRange) {
@@ -130,6 +132,8 @@ export class TaskService {
     return structuredClone(this._steps);
   }
 
+  // Note: These type of methods were added prior to NGXS addition to project.
+  // So naming was intended to suggest it's filling that gap.
   private patchState(steps: Tasks) {
     this._steps = steps.map((v: Task, i: number) => ({
       ...this._steps[i],
