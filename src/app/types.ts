@@ -1,15 +1,15 @@
 export enum TaskType {
-  PlanSelection,
-  Profile,
-  TradeIn,
-  Accessories,
-  Products,
-  CreditApp,
-  DocumentUpload,
-  ScheduleDelivery,
+  TaskA,
+  TaskB,
+  TaskC,
+  TaskD,
+  TaskE,
+  TaskF,
+  TaskG,
+  TaskH,
 }
 
-export type LastLockableTask = TaskType.CreditApp | TaskType.DocumentUpload;
+export type LastLockableTask = TaskType.TaskF | TaskType.TaskG;
 
 // Just an idea: mutually exclusive states
 // However: What happens when a step is invalidated or hidden, and then it comes back after being completed? Should it be reset?
@@ -31,13 +31,13 @@ export interface Task {
   taskType: Readonly<TaskType>;
   // Some tasks cannot be skipped
   optional: Readonly<boolean>;
-  availableOnCashDeal: Readonly<boolean>;
+  available: Readonly<boolean>;
   status: TaskStatus;
 }
 
 export type TaskConfig = Pick<
   Task,
-  'label' | 'taskType' | 'optional' | 'availableOnCashDeal'
+  'label' | 'taskType' | 'optional' | 'available'
 >;
 
 // Note: Uncertain about handling for stand alone steps/pages
@@ -45,7 +45,7 @@ export class Task {
   constructor(
     public label: string,
     public taskType: Readonly<TaskType>,
-    public availableOnCashDeal: boolean = true,
+    public available: boolean = true,
     public optional: boolean = true
   ) {
     this.status = TaskStatus.Pristine;

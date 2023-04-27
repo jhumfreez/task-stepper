@@ -5,38 +5,26 @@ import { ExampleComponent } from './example-component/example-component.componen
 import { FillerComponent } from './filler-component/filler.component';
 import { TaskType } from './types';
 
-/**
- * Step 1: Start Checkout
- * Step 2: Contact Info
- * Step 3: Trade-in
- * Step 4: Accessories
- * Step 5: Financing Application
- * Step 6: Documents
- * Step 7: Final Review
- *
- * Post-submit: Purchase Review
- */
-
 export enum RoutePath {
-  PlanSelection = 'start-checkout',
-  Profile = 'profile',
-  TradeIn = 'trade-in',
-  Accessories = 'accessories',
-  Products = 'insurance',
-  CreditApp = 'credit-application',
-  DocumentUpload = 'documents',
-  ScheduleDelivery = 'schedule-delivery',
+  RouteA = 'route A',
+  RouteB = 'route B',
+  RouteC = 'route C',
+  RouteD = 'route D',
+  RouteE = 'route E',
+  RouteF = 'route F',
+  RouteG = 'route G',
+  RouteH = 'route H',
 }
 
 export const BUY_ROUTE_TASK_MAP = new Map([
-  [TaskType.PlanSelection, RoutePath.PlanSelection],
-  [TaskType.Profile, RoutePath.Profile],
-  [TaskType.TradeIn, RoutePath.TradeIn],
-  [TaskType.Accessories, RoutePath.Accessories],
-  [TaskType.Products, RoutePath.Products],
-  [TaskType.CreditApp, RoutePath.CreditApp],
-  [TaskType.DocumentUpload, RoutePath.DocumentUpload],
-  [TaskType.ScheduleDelivery, RoutePath.ScheduleDelivery],
+  [TaskType.TaskA, RoutePath.RouteA],
+  [TaskType.TaskB, RoutePath.RouteB],
+  [TaskType.TaskC, RoutePath.RouteC],
+  [TaskType.TaskD, RoutePath.RouteD],
+  [TaskType.TaskE, RoutePath.RouteE],
+  [TaskType.TaskF, RoutePath.RouteF],
+  [TaskType.TaskG, RoutePath.RouteG],
+  [TaskType.TaskH, RoutePath.RouteH],
 ]);
 
 // TODO: Guard finance/lease-only routes
@@ -46,52 +34,52 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: RoutePath.PlanSelection,
-        title: 'Create Your Deal',
+        path: RoutePath.RouteA,
+        title: 'Route A',
         component: FillerComponent,
         // Not sure if I want to use this or not
         data: {
-          config: TASK_CONFIG[TaskType.PlanSelection]
-        }
+          config: TASK_CONFIG[TaskType.TaskA],
+        },
       },
       {
-        path: RoutePath.Profile,
-        title: 'Profile',
+        path: RoutePath.RouteB,
+        title: 'Route B',
         component: ExampleComponent,
       },
       {
-        path: RoutePath.TradeIn,
-        title: 'Trade-in',
+        path: RoutePath.RouteC,
+        title: 'Route C',
         component: FillerComponent,
       },
       {
-        path: RoutePath.Accessories,
-        title: 'Accessories',
+        path: RoutePath.RouteD,
+        title: 'Route D',
         component: FillerComponent,
       },
       {
-        path: RoutePath.Products,
-        title: 'F&I Products',
+        path: RoutePath.RouteE,
+        title: 'Route E',
         component: FillerComponent,
       },
       {
-        path: RoutePath.CreditApp,
-        title: 'Credit App',
+        path: RoutePath.RouteF,
+        title: 'Route F',
         component: FillerComponent,
       },
       {
-        path: RoutePath.DocumentUpload,
-        title: 'Documents',
+        path: RoutePath.RouteG,
+        title: 'Route G',
         component: FillerComponent,
       },
       {
-        path: RoutePath.ScheduleDelivery,
-        title: 'Schedule Delivery',
+        path: RoutePath.RouteH,
+        title: 'Route H',
         component: ExampleComponent,
       },
       {
         path: '**',
-        redirectTo: 'start-checkout',
+        redirectTo: RoutePath.RouteA,
       },
     ],
   },

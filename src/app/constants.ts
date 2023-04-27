@@ -2,27 +2,24 @@ import { Task, TaskConfig, TaskType } from './types';
 import { extractConfig } from './utils';
 
 export const INIT_TASKS: Task[] = [
-  new Task('Choose Your Deal', TaskType.PlanSelection, true, false),
-  new Task('Profile', TaskType.Profile, true, false),
-  new Task('Trade-in', TaskType.TradeIn, true, true),
-  new Task('Accessories', TaskType.Accessories, true, true),
-  new Task('Insurance', TaskType.Products, false, true),
-  new Task('Credit Application', TaskType.CreditApp, false, true),
-  new Task('Documents', TaskType.DocumentUpload, true, true),
-  new Task('Schedule Delivery', TaskType.ScheduleDelivery, true, false),
+  new Task('Config Selection', TaskType.TaskA, true, false),
+  new Task('Contact Info', TaskType.TaskB, true, false),
+  new Task('Thing 1', TaskType.TaskC, true, true),
+  new Task('Thing 2', TaskType.TaskD, true, true),
+  new Task('Thing 3', TaskType.TaskE, false, true),
+  new Task('Locking Point', TaskType.TaskF, false, true),
+  new Task('Thing 4', TaskType.TaskG, true, true),
+  new Task('Finalize', TaskType.TaskH, true, false),
 ];
 
 // Oof...
 export const TASK_CONFIG = new Map<TaskType, TaskConfig>([
-  [TaskType.PlanSelection, extractConfig(INIT_TASKS[TaskType.PlanSelection])],
-  [TaskType.Profile, extractConfig(INIT_TASKS[TaskType.Profile])],
-  [TaskType.TradeIn, extractConfig(INIT_TASKS[TaskType.TradeIn])],
-  [TaskType.Accessories, extractConfig(INIT_TASKS[TaskType.Accessories])],
-  [TaskType.Products, extractConfig(INIT_TASKS[TaskType.Products])],
-  [TaskType.CreditApp, extractConfig(INIT_TASKS[TaskType.CreditApp])],
-  [TaskType.DocumentUpload, extractConfig(INIT_TASKS[TaskType.DocumentUpload])],
-  [
-    TaskType.ScheduleDelivery,
-    extractConfig(INIT_TASKS[TaskType.ScheduleDelivery]),
-  ],
+  [TaskType.TaskA, extractConfig(INIT_TASKS[TaskType.TaskA])],
+  [TaskType.TaskB, extractConfig(INIT_TASKS[TaskType.TaskB])],
+  [TaskType.TaskC, extractConfig(INIT_TASKS[TaskType.TaskC])],
+  [TaskType.TaskD, extractConfig(INIT_TASKS[TaskType.TaskD])],
+  [TaskType.TaskE, extractConfig(INIT_TASKS[TaskType.TaskE])],
+  [TaskType.TaskF, extractConfig(INIT_TASKS[TaskType.TaskF])],
+  [TaskType.TaskG, extractConfig(INIT_TASKS[TaskType.TaskG])],
+  [TaskType.TaskH, extractConfig(INIT_TASKS[TaskType.TaskH])],
 ]);

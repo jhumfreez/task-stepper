@@ -45,9 +45,9 @@ export class AppComponent {
       .fetchMockData(true)
       .pipe(finalize(() => this.toggleLoadingState()))
       .subscribe({
-        next: (isCashOnly) => {
-          if (isCashOnly) {
-            this.taskService.handleCashDeal();
+        next: (isAvailable) => {
+          if (isAvailable) {
+            this.taskService.handleAvailable();
           }
         },
       });

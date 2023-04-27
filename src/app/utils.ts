@@ -5,6 +5,6 @@ export const extractConfig = (task: Task): TaskConfig => {
     label: task.label,
     taskType: task.taskType,
     optional: task.optional,
-    availableOnCashDeal: task.availableOnCashDeal,
+    available: task.available,
   };
 };

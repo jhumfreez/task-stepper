@@ -72,9 +72,9 @@ export class TaskService {
   }
 
   // TODO: Handle navigation or guard route when activated route isn't visible.
-  handleCashDeal() {
+  handleAvailable() {
     const patch: Tasks = this.getState().map((step) => {
-      if (!step.availableOnCashDeal) {
+      if (!step.available) {
         step.status = TaskStatus.Hidden;
       }
       return step;
