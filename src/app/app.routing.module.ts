@@ -6,14 +6,14 @@ import { FillerComponent } from './filler-component/filler.component';
 import { TaskType } from './types';
 
 export enum RoutePath {
-  RouteA = 'route A',
-  RouteB = 'route B',
-  RouteC = 'route C',
-  RouteD = 'route D',
-  RouteE = 'route E',
-  RouteF = 'route F',
-  RouteG = 'route G',
-  RouteH = 'route H',
+  RouteA = 'route-A',
+  RouteB = 'route-B',
+  RouteC = 'route-C',
+  RouteD = 'route-D',
+  RouteE = 'route-E',
+  RouteF = 'route-F',
+  RouteG = 'route-G',
+  RouteH = 'route-H',
 }
 
 export const BUY_ROUTE_TASK_MAP = new Map([
