@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
+import { Observable, of, delay, take } from 'rxjs';
 import { INIT_TASKS } from '../constants';
 import { Task } from '../types';
 
@@ -37,6 +37,6 @@ export class MockTasksHttpService implements FakeHttpService<Task[]> {
 })
 export class SimpleDealHttpService implements FakeHttpService<boolean> {
   fetchMockData(expectedResult = true): Observable<boolean> {
-    return of(expectedResult).pipe(delay(2000));
+    return of(expectedResult).pipe(delay(2000), take(1));
   }
 }
