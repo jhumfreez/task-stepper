@@ -14,12 +14,12 @@ export const INIT_TASKS: Task[] = [
 
 // Oof...
 export const TASK_CONFIG = new Map<TaskType, TaskConfig>([
-  [TaskType.TaskA, extractConfig(INIT_TASKS[TaskType.TaskA])],
-  [TaskType.TaskB, extractConfig(INIT_TASKS[TaskType.TaskB])],
-  [TaskType.TaskC, extractConfig(INIT_TASKS[TaskType.TaskC])],
-  [TaskType.TaskD, extractConfig(INIT_TASKS[TaskType.TaskD])],
-  [TaskType.TaskE, extractConfig(INIT_TASKS[TaskType.TaskE])],
-  [TaskType.TaskF, extractConfig(INIT_TASKS[TaskType.TaskF])],
-  [TaskType.TaskG, extractConfig(INIT_TASKS[TaskType.TaskG])],
-  [TaskType.TaskH, extractConfig(INIT_TASKS[TaskType.TaskH])],
+  [TaskType.TaskA, extractConfig(INIT_TASKS[0])],
+  [TaskType.TaskB, extractConfig(INIT_TASKS[1])],
+  [TaskType.TaskC, extractConfig(INIT_TASKS[2])],
+  [TaskType.TaskD, extractConfig(INIT_TASKS[3])],
+  [TaskType.TaskE, extractConfig(INIT_TASKS[4])],
+  [TaskType.TaskF, extractConfig(INIT_TASKS[5])],
+  [TaskType.TaskG, extractConfig(INIT_TASKS[6])],
+  [TaskType.TaskH, extractConfig(INIT_TASKS[7])],
 ]);
