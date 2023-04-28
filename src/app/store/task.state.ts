@@ -53,7 +53,7 @@ export class TaskState {
 
   @Action(LockTasks)
   lockTasks(ctx: StateContext<TaskStateModel>, action: LockTasks) {
-    const finalLockableStep = TaskType.CreditApp;
+    const finalLockableStep = TaskType.TaskF;
     const patch = ctx.getState().tasks.map((x) => {
       if (x.taskType <= finalLockableStep) {
         x.status = TaskStatus.Locked;
