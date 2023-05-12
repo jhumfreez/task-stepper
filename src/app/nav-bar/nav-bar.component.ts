@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavContextEvent, TaskType } from '../types';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NavContextEvent, Task } from '../types';
 
 @Component({
   selector: 'app-nav-bar',

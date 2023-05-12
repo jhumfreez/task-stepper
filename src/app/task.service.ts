@@ -19,13 +19,18 @@ export class TaskService {
   get visibleSteps() {
     return this.getState()
       .filter(this.isVisible)
-      .map<Task>((x) => structuredClone(x));
+      .map<Task>(x => structuredClone(x));
   }
 
   get steps() {
     // Not returning behavior subject to guard against updates from multiple sources
     return this._step$.asObservable();
   }
+
+  // get nextStep(){
+  //   // return this.visibleSteps()
+  //   return null;
+  // }
 
   get currentStep(): Task {
     const currentStep = this.getState().find(
