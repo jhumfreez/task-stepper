@@ -1,0 +1,33 @@
+.bar {
+  padding: 10px 0;
+  min-height: 30px;
+  background-color: rgb(157, 157, 245);
+  position: sticky;
+  bottom: 0;
+}
+
+button {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+button:hover {
+  filter: brightness(90%);
+}
+
+.btn-container {
+  position: absolute;
+  right: 20px;
+}
+
+button.btn-submit {
+  background-color: gold;
+}
+
+button.btn-previous {
+  background-color: white;
+}
+
+button.btn-advance {
+  background-color: cyan;
+}

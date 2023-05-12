@@ -1,0 +1,25 @@
+<div class="bar">
+<div class="btn-container">
+  <button
+    *ngIf="!(navBtnService.prevState$ | async).hidden"
+    class="btn-previous"
+    (click)="previous()"
+  >
+    Previous
+  </button>
+  <ng-container
+    *ngIf="
+      !(navBtnService.advState$ | async).isSubmit;
+      then advanceBtn;
+      else submitBtn
+    "
+  ></ng-container>
+</div>
+</div>
+
+<ng-template #advanceBtn>
+<button class="btn-advance" (click)="advance()">Advance</button>
+</ng-template>
+<ng-template #submitBtn>
+<button type="submit" class="btn-submit" appSubmit>Submit</button>
+</ng-template>
