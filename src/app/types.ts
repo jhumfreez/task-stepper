@@ -59,3 +59,12 @@ export interface TaskChangeEvent {
 
 export type LockedTask = Readonly<Task>;
 export type Tasks = Task[] | LockedTask[];
+
+/**
+ * Provides context for navigation with global next/previous buttons
+ * * next: Navigate to next available step
+ * * prev: Navigate to previous available step
+ * * back: Navigate back to stepper page (return to the active/current step)
+ * * upload: Submit a document (for pages with forms) or conclude checkout process (final step)
+ */
+export type NavContextEvent = 'next' | 'prev' | 'back' | 'upload';
