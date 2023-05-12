@@ -15,8 +15,16 @@ export class NavBarComponent {
   // Notify parent of intent to navigate, with context
   @Output('navigate') notifyNav: EventEmitter<NavContextEvent>;
 
-  advance() {}
-  previous() {}
-  back() {}
-  submit() {}
+  advance() {
+    this.notifyNav.next('next');
+  }
+  previous() {
+    this.notifyNav.next('prev');
+  }
+  back() {
+    this.notifyNav.next('back');
+  }
+  submit() {
+    this.notifyNav.next('submit');
+  }
 }

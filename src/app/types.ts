@@ -65,6 +65,6 @@ export type Tasks = Task[] | LockedTask[];
  * * next: Navigate to next available step
  * * prev: Navigate to previous available step
  * * back: Navigate back to stepper page (return to the active/current step)
- * * upload: Submit a document (for pages with forms) or conclude checkout process (final step)
+ * * submit: Submit a document (for pages with forms) or conclude checkout process (final step)
  */
-export type NavContextEvent = 'next' | 'prev' | 'back' | 'upload';
+export type NavContextEvent = 'next' | 'prev' | 'back' | 'submit';
